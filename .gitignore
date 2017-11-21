@@ -1,0 +1,9 @@
+.idea/
+.nyc_output/
+_bak/
+coverage/
+node_modules/
+dist/**/*
+!dist/.readme.md
+.DS_Store
+npm-debug.log
