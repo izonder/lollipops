@@ -68,10 +68,10 @@ The application will be exposed at `9000` port, just open in browser URL `http:/
 2) Build package
 
 ```
-yarn build
+yarn docker
 ```
 
-**Note!** This creates a Docker image `lollipops`
+**Note!** This creates a Docker image `lollipops`. To build project without packing to Docker image use command `yarn build`.
 
 ### Roll-out
 
