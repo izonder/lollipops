@@ -1,0 +1,36 @@
+{
+  "modules": {
+    "auth": {},
+    "chat": {},
+    "templates": {}
+  },
+  "drivers": {
+    "auth": {
+      "enabled": true,
+      "driver": "rest",
+      "config": {
+        "url": "http://mysite.tld",
+        "timeout": 10000
+      }
+    },
+    "chat": {
+      "enabled": true,
+      "driver": "ws",
+      "config": {
+        "url": "ws://mysite.tld",
+        "activityTimeout": 20000,
+        "responseTimeout": 10000,
+        "healthCheckInterval": 5000,
+        "handleQueueInterval": 3000
+      }
+    },
+    "upload": {
+      "enabled": true,
+      "driver": "upload",
+      "config": {
+        "url": "http://mysite.tld",
+        "timeout": 10000
+      }
+    }
+  }
+}
