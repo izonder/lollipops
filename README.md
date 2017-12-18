@@ -65,7 +65,7 @@ The application will be exposed at `9000` port, just open in browser URL `http:/
 
 1) Make steps 1-4 for development environment
 
-2) Build package
+2) Build package (IMPORTANT! make sure you've changed package tag namespace `change-your-namespace/` to your own in the command, read more: https://github.com/izonder/dimbu/blob/master/README.md)
 
 ```
 yarn docker
