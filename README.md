@@ -2,6 +2,8 @@
 
 # Lollipops
 
+[![Known Vulnerabilities](https://snyk.io/test/github/izonder/lollipops/badge.svg?targetFile=package.json)](https://snyk.io/test/github/izonder/lollipops?targetFile=package.json)
+
 ![Lollipops](https://user-images.githubusercontent.com/1416966/33080340-244c809c-ced8-11e7-872c-9c11fb4976d5.png)
 
 [Lollipops] - easy and clear React/Redux/Docker boilerplate:
