@@ -15,16 +15,16 @@ export class AuthMiddleware extends ObserverFactory {
     constructor() {
         super();
 
-        this.on(A_APPLICATION_READY, this.init.bind(this));
-        this.on(A_AUTH_SUBMIT, this.login.bind(this));
+        this.on(A_APPLICATION_READY, this.init);
+        this.on(A_AUTH_SUBMIT, this.login);
     }
 
-    init() {
+    init = () => {
         this.config = ((Container.get('config') || {}).modules || {}).auth;
         this.api = Container.get('driver/auth');
-    }
+    };
 
-    async login({action, dispatch}) {
+    login = async ({action, dispatch}) => {
         const {username, password} = action.payload || {};
 
         try {
@@ -37,9 +37,9 @@ export class AuthMiddleware extends ObserverFactory {
         catch (e) {
             this.handleError(dispatch, e);
         }
-    }
+    };
 
-    handleError(dispatch, e) {
+    handleError = (dispatch, e) => {
         dispatch(authFailAction(e));
         dispatch(authLogoutAction());
     }

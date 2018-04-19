@@ -1,12 +1,6 @@
 /* eslint-disable global-require */
-/**
- * TODO: IMPORTANT!
- * Don't use async arrow with react-hot-loader, be aware of this:
- * https://github.com/gaearon/react-hot-loader/issues/391
- */
 import React from 'react';
 import {render} from 'react-dom';
-import {AppContainer} from 'react-hot-loader';
 import {createReducer} from 'core/reducer';
 import {configureStore, history} from 'core/store';
 import {App} from 'core/app';
@@ -26,9 +20,7 @@ const
 
         //render app
         render(
-            <AppContainer>
-                <App store={store} history={history} component={IndexLayout} />
-            </AppContainer>,
+            <App store={store} history={history} component={IndexLayout} />,
             document.getElementById('root')
         );
 

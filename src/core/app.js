@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {hot} from 'react-hot-loader';
 import {Provider} from 'react-redux';
 import {Route} from 'react-router-dom';
 import {ConnectedRouter} from 'react-router-redux';
@@ -23,7 +24,7 @@ const
  * Application core
  * TODO: add ability to specify root path instead of hardcoded "/"
  */
-class App extends React.Component {
+class AppComponent extends React.Component {
     static propTypes = {
         store: PropTypes.object.isRequired,
         history: PropTypes.object.isRequired,
@@ -85,6 +86,8 @@ class App extends React.Component {
         );
     }
 }
+
+const App = hot(module)(AppComponent); //eslint-disable-line one-var
 
 export {
     App,
