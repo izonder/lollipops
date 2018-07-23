@@ -18,7 +18,7 @@
     "build": "yarn && cross-env NODE_ENV=production webpack --config ./webpack",
     "docker": "yarn build && dimbu -r change-your-namespace/",
     "test": "yarn lint",
-    "lint": "eslint ."
+    "lint": "yarn && eslint ."
   },
   "browserslist": [
     "> 1%",
@@ -38,22 +38,21 @@
     "lint"
   ],
   "devDependencies": {
-    "autoprefixer": "^8.0.0",
+    "autoprefixer": "^9.0.1",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.6.0",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
-    "bootstrap": "4.0.0",
+    "bootstrap": "4.1.2",
     "classnames": "^2.2.5",
     "clean-webpack-plugin": "^0.1.16",
     "cross-env": "^5.0.5",
-    "css-loader": "^0.28.5",
+    "css-loader": "^1.0.0",
     "dimbu": "izonder/dimbu#v1.0.2",
-    "eslint-config-standard": "izonder/eslint-config-standard",
+    "eslint-config-standard": "izonder/eslint-config-standard#v2.0.0",
     "eslint-loader": "^2.0.0",
-    "eslint-plugin-react": "^7.3.0",
     "extract-text-webpack-plugin": "^3.0.1",
     "file-loader": "^1.1.5",
     "html-loader": "^0.5.1",
