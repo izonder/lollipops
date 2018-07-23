@@ -4,6 +4,7 @@ const path = require('path'),
     HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
+    mode: 'development',
     devtool: 'inline-source-map',
 
     entry: [
@@ -22,10 +23,6 @@ module.exports = {
             {
                 test: /\.html$/,
                 loader: 'html-loader'
-            },
-            {
-                test: /\.json$/,
-                loader: 'json-loader'
             },
             {
                 test: /\.(jpg|png|gif|mp3|aac|ogg)$/,
