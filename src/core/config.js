@@ -4,4 +4,4 @@ import * as Production from 'configs/production.json';
 
 const Config = isProduction() ? Production : Development;
 
-export default Config;
+export default Config.default;
