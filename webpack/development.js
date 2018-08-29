@@ -8,7 +8,7 @@ module.exports = {
     devtool: 'inline-source-map',
 
     entry: [
-        'babel-polyfill',
+        '@babel/polyfill',
         path.resolve('./src/index')
     ],
 

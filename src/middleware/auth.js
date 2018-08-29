@@ -20,7 +20,7 @@ export class AuthMiddleware extends ObserverFactory {
     }
 
     init = () => {
-        this.config = ((Container.get('config') || {}).modules || {}).auth;
+        this.config = Container.get('config')?.modules?.auth;
         this.api = Container.get('driver/auth');
     };
 

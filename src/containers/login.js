@@ -16,7 +16,7 @@ class LoginContainer extends React.Component {
     static mapStateToProps = (state) => {
         return {
             ...state.auth,
-            referrer: ((state.routing.location || {}).state || {}).referrer || '/'
+            referrer: state.routing.location?.state?.referrer || '/'
         };
     };
 
