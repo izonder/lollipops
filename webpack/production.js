@@ -1,7 +1,7 @@
 const path = require('path'),
     webpack = require('webpack'),
     autoprefixer = require('autoprefixer'),
-    ExtractTextPlugin = require('extract-text-webpack-plugin'),
+    MiniCssExtractPlugin = require('mini-css-extract-plugin'),
     HtmlWebpackPlugin = require('html-webpack-plugin'),
     CleanWebpackPlugin = require('clean-webpack-plugin'),
     UglifyJsPlugin = require('uglifyjs-webpack-plugin');
@@ -48,26 +48,24 @@ module.exports = {
             },
             {
                 test: /\.(scss|css)$/,
-                use: ExtractTextPlugin.extract({
-                    fallback: 'style-loader',
-                    use: [
-                        {
-                            loader: 'css-loader',
-                            options: {
-                                importLoaders: 1
-                            }
-                        },
-                        {
-                            loader: 'postcss-loader',
-                            options: {
-                                plugins: () => [
-                                    autoprefixer()
-                                ]
-                            }
-                        },
-                        'sass-loader'
-                    ]
-                })
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            importLoaders: 1
+                        }
+                    },
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            plugins: () => [
+                                autoprefixer()
+                            ]
+                        }
+                    },
+                    'sass-loader'
+                ]
             }
         ]
     },
@@ -108,7 +106,7 @@ module.exports = {
                 'DEV_TOOL': JSON.stringify('disable')
             }
         }),
-        new ExtractTextPlugin('[name].[md5:contenthash:hex:20].min.css')
+        new MiniCssExtractPlugin({filename: '[name].[hash].min.css'})
     ],
 
     optimization: {
