@@ -15,10 +15,10 @@
 * Docker
 
 ## Pre-requisites
-* Node.js: v.8.9.0+
-* Yarn: v.1.3.0+
 
-## Development
+* Node.js: v8.9.4+
+* Yarn: v1.3.0+
+* Docker: v1.12.3+
 
 1) Install `build-essential` and `git` packages:
 
@@ -26,7 +26,7 @@
 sudo apt-get install -y build-essential git
 ```
 
-2) Install Node.js 8.9.0+:
+2) Install Node.js 8.9.4+:
 
 ```
 curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
@@ -40,16 +40,28 @@ echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/source
 sudo apt-get update
 sudo apt-get install yarn
 ```
-4) Clone git repo:
+4) Install Docker to production host if it doesn't exist, e.g. via `https://get.docker.com`:
+
+```
+curl -fsSL get.docker.com | sudo sh -
+```
+or analogue from [Rancher](https://rancher.com/docs/rancher/v1.6/en/hosts/) with specifying the certain version:
+
+```
+curl https://releases.rancher.com/install-docker/17.03.sh | sh
+```
+5) Clone git repo:
 
 ```
 git clone git@github.com:izonder/lollipops.git ./lollipops
 cd ./lollipops
 ```
 
+## Development
+
 **Tip!** In old versions of WebStorm mark `/src` directory as resource root for better resolving.
 
-5) Install dependencies and run watcher 
+1) Install dependencies and run watcher 
 
 ```
 yarn start
@@ -65,9 +77,7 @@ The application will be exposed at `9000` port, just open in browser URL `http:/
 
 ### Build
 
-1) Make steps 1-4 for development environment
-
-2) Build package (IMPORTANT! make sure you've changed package tag namespace `change-your-namespace/` to your own in the command, read more: https://github.com/izonder/dimbu/blob/master/README.md)
+1) Build package (IMPORTANT! make sure you've changed package tag namespace `change-your-namespace/` to your own in the command, read more: https://github.com/izonder/dimbu/blob/master/README.md)
 
 ```
 yarn docker
@@ -77,14 +87,9 @@ yarn docker
 
 ### Roll-out
 
-1) Install Docker to production host if it doesn't exist, e.g. via `https://get.docker.com`:
-```
-curl -fsSL get.docker.com | sudo sh -
-```
+1) Upload Docker image `lollipops` to production (e.g. via Docker registry)
 
-2) Upload Docker image `lollipops` to production (e.g. via Docker registry)
-
-3) Run Docker container:
+2) Run Docker container:
 ```
 sudo docker run -d --restart=unless-stopped -p 80:80 lollipops sh
 ```
