@@ -1,15 +1,22 @@
 import {combineReducers} from 'redux';
-import {routerReducer as routing} from 'react-router-redux';
+import {connectRouter} from 'connected-react-router';
 
 export const
     /**
-     * Combine (mixin) routing reducer
-     * @param {Object} reducers
+     * Reducers factory
+     * @param {Object} history
      * @returns {Function}
      */
-    createReducer = (reducers) => {
-        return combineReducers({
-            ...reducers,
-            routing
-        });
+    createReducer = (history) => {
+        /**
+         * Combine (mixin) routing reducer
+         * @param {Object} reducers
+         * @returns {Function}
+         */
+        return (reducers) => {
+            return combineReducers({
+                ...reducers,
+                router: connectRouter(history)
+            });
+        };
     };

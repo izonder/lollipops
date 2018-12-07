@@ -1,34 +1,34 @@
-import createHistory from 'history/createBrowserHistory';
-import {applyMiddleware, createStore, compose} from 'redux';
-import {routerMiddleware} from 'react-router-redux';
+import {applyMiddleware, createStore as store, compose} from 'redux';
+import {routerMiddleware} from 'connected-react-router';
 import createSagaMiddleware from 'redux-saga';
 import thunk from 'redux-thunk';
 import {isProduction} from 'core/common';
 import DevTools from 'core/devtools';
 
-const history = createHistory(),
-    historyMiddleware = routerMiddleware(history),
-    sagaMiddleware = createSagaMiddleware(),
-
+export const
     /**
-     * Configure store
-     * @param {Array.<Function>} middleware
-     * @param {*} rootReducer
-     * @param {*} initialState
+     * Store factory
+     * @param {*} history
      * @returns {*}
      */
-    configureStore = (middleware = [], rootReducer = () => {}, initialState = {}) => {
-        const appliedMiddleware = applyMiddleware(historyMiddleware, sagaMiddleware, thunk, ...middleware);
+    createStore = (history) => {
+        /**
+         * Configure store
+         * @param {Array.<Function>} middleware
+         * @param {*} rootReducer
+         * @param {*} initialState
+         * @returns {*}
+         */
+        return (middleware = [], rootReducer = () => {}, initialState = {}) => {
+            const historyMiddleware = routerMiddleware(history),
+                sagaMiddleware = createSagaMiddleware(),
+                appliedMiddleware = applyMiddleware(historyMiddleware, sagaMiddleware, thunk, ...middleware);
 
-        return createStore(
-            rootReducer,
-            initialState,
-            isProduction() ? appliedMiddleware : compose(appliedMiddleware, DevTools.instrument())
-        );
+            return store(
+                rootReducer,
+                initialState,
+                isProduction() ? appliedMiddleware : compose(appliedMiddleware, DevTools.instrument())
+            );
+        };
     };
-
-export {
-    history,
-    configureStore
-};
 
