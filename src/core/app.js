@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {hot} from 'react-hot-loader';
 import {Provider} from 'react-redux';
 import {Route} from 'react-router-dom';
-import {ConnectedRouter} from 'react-router-redux';
+import {ConnectedRouter} from 'connected-react-router';
 
 import {enableDevTool} from 'core/common';
 import DevTools from 'core/devtools';
@@ -76,12 +76,12 @@ class AppComponent extends React.Component {
 
         return (
             <Provider store={store}>
-                <div id="wrapper">
-                    <ConnectedRouter history={history}>
-                        <Route path="/" component={component}/>
-                    </ConnectedRouter>
-                    {enableDevTool() ? <DevTools /> : ''}
-                </div>
+                <ConnectedRouter history={history}>
+                    <div id="wrapper">
+                        <Route path="/" component={component} />
+                        {enableDevTool() ? <DevTools /> : ''}
+                    </div>
+                </ConnectedRouter>
             </Provider>
         );
     }

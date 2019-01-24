@@ -1,34 +1,42 @@
 /* eslint-disable global-require */
 import React from 'react';
 import {render} from 'react-dom';
+import {history} from 'core/history';
 import {createReducer} from 'core/reducer';
-import {configureStore, history} from 'core/store';
+import {createStore} from 'core/store';
 import {App} from 'core/app';
 import middleware from 'middleware';
+import reducers from 'reducers';
 
 const
+    reducer = createReducer(history),
+    store = createStore(history),
+
     /**
      * Initialize function
-     * @param {*} store
+     * @param {*} storeInstance
+     * @param {boolean} replaceReducers
      */
-    initialize = (store) => {
-        const reducers = require('reducers/index').default,
-            IndexLayout = require('layouts/index/index').default;
+    initialize = async (storeInstance, replaceReducers = false) => {
+        const {default: IndexLayout} = await import('layouts/index');
 
         //replace reducers
-        store.replaceReducer(createReducer(reducers));
+        if (replaceReducers) {
+            const {default: newReducers} = await import('reducers');
+            storeInstance.replaceReducer(reducer(newReducers));
+        }
 
         //render app
         render(
-            <App store={store} history={history} component={IndexLayout} />,
+            <App store={storeInstance} history={history} component={IndexLayout} />,
             document.getElementById('root')
         );
 
         //hot-module-replacement
         if (module.hot) {
-            module.hot.accept('reducers/index', () => initialize(store));
-            module.hot.accept('layouts/index', () => initialize(store));
+            module.hot.accept('reducers/index', () => initialize(storeInstance, true));
+            module.hot.accept('layouts/index', () => initialize(storeInstance, true));
         }
     };
 
-initialize(configureStore(middleware));
+initialize(store(middleware, reducer(reducers)));
