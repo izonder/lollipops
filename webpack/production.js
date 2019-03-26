@@ -88,9 +88,9 @@ module.exports = {
     },
 
     plugins: [
-        new CleanWebpackPlugin(['dist'], {
-            root: path.resolve('.'),
-            exclude: ['.readme.md']
+        new CleanWebpackPlugin({
+            verbose: true,
+            cleanOnceBeforeBuildPatterns: ['**/*', '!.readme.md']
         }),
         new HtmlWebpackPlugin({
             template: path.resolve('./src/assets/index.html'),
