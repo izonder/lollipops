@@ -28,7 +28,7 @@ export default class Login extends React.Component {
     handleSubmit = (e) => {
         e.preventDefault();
 
-        this.state.username && this.state.password && this.props.onSubmit(this.state);
+        return this.state.username && this.state.password && this.props.onSubmit(this.state);
     };
 
     render() {
